@@ -1,0 +1,16 @@
+<table>
+    <thead>
+        <tr>
+            <th></th>
+            <th>Login</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let user of users">
+            <td>
+                <a routerLink="edit/{{user.id}}">Edit</a>
+            </td>
+            <td>{{user.username}}</td>
+        </tr>
+    </tbody>
+</table>

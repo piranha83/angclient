@@ -1,0 +1,11 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    Login
+    <input type="text" formControlName="username" [ngClass]="{ 'is-invalid': submitted && c.username.errors }" />
+    Psw
+    <input type="password" formControlName="password" [ngClass]="{ 'is-invalid': submitted && c.password.errors }" />
+
+    <button [disabled]="loading">
+        <span *ngIf="loading"></span>
+        Login
+    </button>
+</form>
