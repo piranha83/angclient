@@ -8,13 +8,15 @@ import { JwtInterceptor, ErrorInterceptor } from './interceptors';
 
 import { AppComponent } from './app.component';
 import { HomeComponent, LoginComponent, UserComponent } from './components';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 @NgModule({
   imports: [
     BrowserModule,
     ReactiveFormsModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgxPaginationModule
   ],
   declarations: [
     AppComponent,

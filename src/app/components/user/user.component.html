@@ -1,16 +1,25 @@
-<table>
+<table class=”table”>
     <thead>
         <tr>
-            <th></th>
-            <th>Login</th>
+            <th>Id</th>            
         </tr>
     </thead>
-    <tbody>
-        <tr *ngFor="let user of users">
-            <td>
-                <a routerLink="edit/{{user.id}}">Edit</a>
-            </td>
-            <td>{{user.username}}</td>
+    <tbody *ngFor='let user of users | paginate : {
+        itemsPerPage: pageSize,
+        currentPage: page,
+        totalItems: count
+      }'>
+        <tr>
+            <td>{{user.login}}</td>
         </tr>
     </tbody>
 </table>
+<div>
+    <pagination-controls previousLabel="Prev" nextLabel="Next" responsive="true"
+        (pageChange)="handlePageChange($event)"></pagination-controls>
+</div>
+<select (change)="handlePageSizeChange($event)">
+    <option *ngFor="let size of pageSizes" [ngValue]="size">
+        {{ size }}
+    </option>
+</select>

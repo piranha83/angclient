@@ -11,12 +11,14 @@ import { User } from '@app/domains/User';
 export class IdentityService {
     private userSubject: BehaviorSubject<User>;
     public user: Observable<User>;
+    private localStorage: Storage;
 
-    constructor(
+    constructor(       
         private router: Router,
         private http: HttpClient
     ) {
-        this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user')));
+        this.localStorage = localStorage;
+        this.userSubject = new BehaviorSubject<User>(JSON.parse(this.localStorage.getItem('user')));
         this.user = this.userSubject.asObservable();
     }
 
@@ -27,19 +29,19 @@ export class IdentityService {
     login(login, password) {
         return this.http.post<User>(`${environment.apiUrl}/identity/authenticate`, { login, password })
             .pipe(map(user => {
-                localStorage.setItem('user', JSON.stringify(user));
+                this.localStorage.setItem('user', JSON.stringify(user));
                 this.userSubject.next(user);
                 return user;
             }));
     }
 
     logout() {
-        localStorage.removeItem('user');
+        this.localStorage.removeItem('user');
         this.userSubject.next(null);
         this.router.navigate(['/identity/logout']);
     }
 
-    getAll() {
+    getAll(params? :any) {
         return this.http.get<User[]>(`${environment.apiUrl}/identity`);
     }
 }
