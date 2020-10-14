@@ -5,21 +5,13 @@
         </tr>
     </thead>
     <tbody *ngFor='let user of users | paginate : {
-        itemsPerPage: pageSize,
-        currentPage: page,
-        totalItems: count
+        itemsPerPage: paginator.pageSize,
+        currentPage: paginator.page,
+        totalItems: paginator.count
       }'>
         <tr>
             <td>{{user.login}}</td>
         </tr>
     </tbody>
 </table>
-<div>
-    <pagination-controls previousLabel="Prev" nextLabel="Next" responsive="true"
-        (pageChange)="handlePageChange($event)"></pagination-controls>
-</div>
-<select (change)="handlePageSizeChange($event)">
-    <option *ngFor="let size of pageSizes" [ngValue]="size">
-        {{ size }}
-    </option>
-</select>
+<paginator (onChanged)="retrieve($event)" [pageSize]="3"></paginator>    

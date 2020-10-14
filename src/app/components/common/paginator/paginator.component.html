@@ -1,0 +1,6 @@
+<pagination-controls previousLabel="Prev" nextLabel="Next" responsive="true" (pageChange)="pageChange($event)"></pagination-controls>
+<select (change)="sizeChange($event)">
+    <option *ngFor="let size of pageSizes" [ngValue]="size">
+        {{ size }}
+    </option>
+</select>

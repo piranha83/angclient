@@ -9,6 +9,7 @@ import { JwtInterceptor, ErrorInterceptor } from './interceptors';
 import { AppComponent } from './app.component';
 import { HomeComponent, LoginComponent, UserComponent } from './components';
 import {NgxPaginationModule} from 'ngx-pagination';
+import { PaginatorComponent } from './components/common/paginator/paginator.component';
 
 @NgModule({
   imports: [
@@ -22,7 +23,8 @@ import {NgxPaginationModule} from 'ngx-pagination';
     AppComponent,
     HomeComponent,
     UserComponent,
-    LoginComponent
+    LoginComponent,
+    PaginatorComponent
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
